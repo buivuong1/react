@@ -2,9 +2,13 @@
 <html>
   <head>
     <title>My App</title>
+    <script>
+      window.__INITIAL_STATE__ = <%- JSON.stringify(initialState) %>;
+    </script>
   </head>
   <body>
-    <div id="app"><%- markup %></div>
+    <div id="app"><%- componentHTML %></div>
+    <script type="text/javascript" src="jquery/dist/jquery.slim.min.js"></script>
     <script type="text/javascript" src="build.js"></script>
   </body>
 </html>

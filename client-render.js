@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Router} from 'react-router';
+import React from 'react'
+import {render} from 'react-dom'
+import {Router, browserHistory, match} from 'react-router'
+import {Provider} from 'react-redux'
+import * as reducers from './shared/reducers'
+import {routes} from './shared/routes'
+import promiseMiddleware from './shared/lib/promiseMiddleware'
+import immutifyState from './shared/lib/immutifyState'
+import {createStore, combineReducers, applyMiddleware } from 'redux'
 
-import {routes} from './routes';
+const initialState = immutifyState(window.__INITIAL_STATE__)
+const reducer = combineReducers(reducers)
+const store   = applyMiddleware(promiseMiddleware)(createStore)(reducer, initialState)
 
-import {browserHistory} from 'react-router';
-
-ReactDOM.render(
-    <Router routes={routes} history={browserHistory}/>,
+render(
+    <Provider store={store}>
+        <Router routes={routes} history={browserHistory}/>
+    </Provider>,
     document.getElementById('app')
 )
