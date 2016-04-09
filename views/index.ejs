@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My App</title>
+    <title><%- head.title %></title>
+    <%- head.meta %>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/components/reset.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/components/site.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/components/icon.min.css">
+    <link rel="stylesheet" type="text/css" href="semantic/dist/components/flag.min.css">
     <script>
       window.__INITIAL_STATE__ = <%- JSON.stringify(initialState) %>;
     </script>
   </head>
   <body>
     <div id="app"><%- componentHTML %></div>
-    <script type="text/javascript" src="jquery/dist/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="semantic/dist/components/site.min.js"></script>
     <script type="text/javascript" src="build.js"></script>
   </body>
 </html>

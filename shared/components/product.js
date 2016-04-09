@@ -1,12 +1,12 @@
 import React, {PropTypes, Component} from 'react'
-import Immutable from 'immutable'
 import {bindActionCreators} from 'redux'
 import * as TodoActions from '../actions/TodoActions'
 import {connect} from 'react-redux'
+import Helmet from "react-helmet"
 
 class Product extends Component{
     static propTypes = {
-        todos: PropTypes.any.required,
+        todos: PropTypes.any,
         dispatch: PropTypes.func.isRequired
     }
     static needs = [
@@ -14,11 +14,16 @@ class Product extends Component{
     ]
     render(){
         const {todos, dispatch} = this.props
-        console.log(todos.get(0))
         return (
             <div>
+                <Helmet
+                    title="Product"
+                    meta={[
+                        {"name": "description", "content": "Product description"},
+                        {"property": "og:type", "content": "article"}
+                    ]}
+                />
                 <h1>Product</h1>
-                {todos.get(2)}
             </div>
         )
     }

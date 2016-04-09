@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes){
-    var users = sequelize.define('users', {
+    var User = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -46,7 +46,7 @@ module.exports = function(sequelize, DataTypes){
         paranoid: true,
         underscored: true,
         freezeTableName: true,
-        tableName: 'users',
+        tableName: 'User',
         classMethods: {
             associate: function(models){
                 
@@ -54,5 +54,5 @@ module.exports = function(sequelize, DataTypes){
         }
     })
 
-    return users;
+    return User;
 }

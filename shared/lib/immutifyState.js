@@ -1,7 +1,4 @@
-import { fromJS } from 'immutable';
-import assign     from 'object-assign';
-
-Object.assign = Object.assign || assign;
+//import { fromJS } from 'immutable';
 
 // Abstraction to handle pre-composedstate received from server
 // (ie, leave top level keys untouched)
@@ -11,7 +8,7 @@ export default function immutifyState(obj) {
   Object
     .keys(objMut)
     .forEach(key => {
-      objMut[key] = fromJS(objMut[key]);
+      //objMut[key] = fromJS(objMut[key]);
     });
 
   return objMut;

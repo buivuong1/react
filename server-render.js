@@ -1,12 +1,13 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {match, createMemoryHistory, RouterContext} from 'react-router';
+import {match, RouterContext} from 'react-router';
 import {Provider} from 'react-redux';
 import {routes} from './shared/routes';
 import * as reducers from './shared/reducers';
 import promiseMiddleware from './shared/lib/promiseMiddleware';
 import fetchComponentData from './shared/lib/fetchComponentData';
-import {createStore, combineReducers, applyMiddleware } from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import Helmet from 'react-helmet';
 
 import express from 'express';
 import http from 'http';
@@ -28,10 +29,9 @@ app.use(express.static('bower_components'));
 app.set('view engine', 'ejs');
 
 app.get('*', (req, res) => {
-    const history = createMemoryHistory(req.url);
     const reducer = combineReducers(reducers);
     const store = applyMiddleware(promiseMiddleware)(createStore)(reducer);
-    match({routes, history}, (err, redirectLocation, renderProps) => {
+    match({routes, location: req.url}, (err, redirectLocation, renderProps) => {
         if(err){
             res.status(500).send(err.message);
         }else if(redirectLocation){
@@ -46,7 +46,8 @@ app.get('*', (req, res) => {
                     );
                     const componentHTML = renderToString(InitialView);
                     const initialState = store.getState();
-                    res.render('index', {componentHTML, initialState});
+                    let head = Helmet.rewind();
+                    res.render('index', {componentHTML, initialState, head});
                 })
                 .catch(err => res.end(err.message))
         }else{
