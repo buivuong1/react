@@ -2,10 +2,10 @@ var Sequelize = require('sequelize');
 
 module.exports =  new Sequelize(
     'design',
-    'root',
+    'postgres',
     'zaq12wsxcde3',
     {
-        dialect: 'mysql',
+        dialect: 'postgres',
         host: '127.0.0.1'
     }
 )

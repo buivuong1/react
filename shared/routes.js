@@ -1,5 +1,7 @@
-import AppComponent from './components/app';
-import ProductComponent from './components/product';
+import AppComponent from './components/app'
+import ProductComponent from './components/product'
+import AboutComponent from './components/about'
+import UserLoginComponent from './components/user/login'
 
 const routes = {
     path: '',
@@ -9,6 +11,14 @@ const routes = {
             path: '/product',
             component: ProductComponent
         },
+        {
+            path: '/about',
+            component: AboutComponent
+        },
+        {
+            path: '/login',
+            component: UserLoginComponent
+        }
         /*{
             path: '/about',
             component: AboutComponent
