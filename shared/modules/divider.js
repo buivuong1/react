@@ -3,7 +3,11 @@ import {DividerChunks} from '../chunks'
 
 class Divider extends Component{
     static propTypes = {
-        className: PropTypes.string
+        className: PropTypes.string,
+        type: PropTypes.string
+    }
+    static defaultProps = {
+        type: 'div'
     }
     componentDidMount(){
         var self = this
@@ -12,9 +16,7 @@ class Divider extends Component{
     render(){
         var className = (!this.props.className)?'ui divider':'ui '+this.props.className+' divider'
         return (
-            <div className={className} ref="divider">
-                {this.props.children}
-            </div>
+            React.createElement(this.props.type, {className: className, ref: 'divider'}, this.props.children)
         )
     }
 }

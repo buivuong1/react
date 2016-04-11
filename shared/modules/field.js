@@ -2,10 +2,12 @@ import React, {Component, PropTypes} from 'react'
 
 class Field extends Component{
     static propTypes = {
-        className: PropTypes.string
+        className: PropTypes.string,
+        type: PropTypes.string
     }
     render(){
-        var className = (!this.props.className)?'field':this.props.className+' field'
+        var type = (this.props.type !== 'group')?'field':'fields'        
+        var className = (!this.props.className)?type:this.props.className+' '+type
         return (
             <div className={className}>
                 {this.props.children}

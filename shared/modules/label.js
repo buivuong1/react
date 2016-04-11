@@ -3,7 +3,11 @@ import {LabelChunks} from '../chunks'
 
 class Label extends Component{
     static propTypes = {
-        className: PropTypes.string
+        className: PropTypes.string,
+        type: PropTypes.string
+    }
+    static defaultProps = {
+        type: 'div'
     }
     componentDidMount(){
         var self = this
@@ -12,9 +16,7 @@ class Label extends Component{
     render(){
         var className = (!this.props.className)?'ui label':'ui '+this.props.className+' label'
         return (
-            <div className={className} ref="label">
-                {this.props.children}
-            </div>
+            React.createElement(this.props.type, {className: className, ref: 'label'}, this.props.children)
         )
     }
 }

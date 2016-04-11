@@ -23,7 +23,7 @@ class Product extends Component{
                         {"property": "og:type", "content": "article"}
                     ]}
                 />
-                <h1>Product</h1>
+                <h1>asasass</h1>
             </div>
         )
     }

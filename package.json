@@ -20,6 +20,7 @@
   "devDependencies": {
     "axios": "^0.9.1",
     "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-class-properties": "^6.6.0",
@@ -38,6 +39,7 @@
     "lwip": "0.0.8",
     "q": "^1.4.1",
     "react": "^0.14.8",
+    "react-dom": "^0.14.8",
     "react-helmet": "^3.0.0",
     "react-redux": "^4.4.1",
     "react-router-redux": "^4.0.0",

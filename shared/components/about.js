@@ -8,7 +8,9 @@ class About extends Component{
             <Grid className="three column very relaxed">
                 <Helmet
                     title="About"/>
-                About
+                <Column>
+                    About
+                </Column>
             </Grid>
         )
     }
