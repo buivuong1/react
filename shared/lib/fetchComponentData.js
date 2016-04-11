@@ -1,10 +1,14 @@
 export default function fetchComponentData(dispatch, components, params) {
-  const needs = components.reduce( (prev, current) => {
-    console.log
-    return current ? (current.needs || []).concat(prev) : prev;
-  }, []);
+    const needs = components.reduce( (prev, current) => {
+        return current ? (current.needs || []).concat(prev) : prev;
+    }, []);
 
-  const promises = needs.map(need => dispatch(need(params)));
-
-  return Promise.all(promises);
+    const paramsStr = JSON.stringify(params);
+    const paramsIndex = paramsStr.indexOf('.js');
+    if(paramsIndex === -1){
+        const promises = needs.map(need => dispatch(need(params)));
+        return Promise.all(promises);
+    }else{
+        return Promise.resolve('no render'); 
+    }
 }

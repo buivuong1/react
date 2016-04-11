@@ -4,7 +4,8 @@ import {ButtonChunks} from '../chunks'
 class Button extends Component{
     static propTypes = {
         className: PropTypes.string,
-        type: PropTypes.string
+        type: PropTypes.string,
+        group: PropTypes.bool
     }
     static defaultProps = {
         type: 'button'
@@ -14,7 +15,8 @@ class Button extends Component{
         ButtonChunks().then(buttons => {})
     }
     render(){
-        var className = (!this.props.className)?'ui button':'ui '+this.props.className+' button'
+        var button = (!this.props.group)?'button':'buttons'
+        var className = (!this.props.className)?'ui '+button:'ui '+this.props.className+' '+button
         return (
             React.createElement(this.props.type, {className: className, ref: 'button'}, this.props.children)
         )

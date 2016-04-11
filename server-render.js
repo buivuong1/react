@@ -23,7 +23,7 @@ app.use(compress({
      }
 }));
 
-app.use(express.static('public'));
+app.use('/public', express.static('public'));
 app.use(express.static('bower_components'));
 
 app.set('view engine', 'ejs');
@@ -38,16 +38,20 @@ app.get('*', (req, res) => {
             res.redirect(302, redirectLocation.pathname + redirectLocation.search);
         }else if(renderProps){
                 fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
-                .then(()=>{
-                    const InitialView = (
-                        <Provider store={store}>
-                            <RouterContext {...renderProps}/>
-                        </Provider>
-                    );
-                    const componentHTML = renderToString(InitialView);
-                    const initialState = store.getState();
-                    let head = Helmet.rewind();
-                    res.render('index', {componentHTML, initialState, head});
+                .then((response)=>{
+                    if(response !== 'no render'){
+                        const InitialView = (
+                            <Provider store={store}>
+                                <RouterContext {...renderProps}/>
+                            </Provider>
+                        );
+                        const componentHTML = renderToString(InitialView);
+                        const initialState = store.getState();
+                        let head = Helmet.rewind();
+                        res.render('index', {componentHTML, initialState, head});
+                    }else{
+                        res.json();
+                    }
                 })
                 .catch(err => res.end(err.message))
         }else{
