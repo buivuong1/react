@@ -1,13 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router'
-import {Container} from '../modules'
+import * as M from 'modules'
 
 class App extends React.Component{
     render(){
         return (
-            <Container>
+            <M.Container>
                 {this.props.children}
-            </Container>
+            </M.Container>
         )
     }
 }
