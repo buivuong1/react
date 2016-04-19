@@ -4,18 +4,18 @@ import * as M from 'modules'
 
 class Product extends Component{
     static modules = [
-        'timedropper',
-        'timepicki'
+        'timedropper'
     ]
     constructor(props){
         super(props)
         this._onClick = this._onClick.bind(this)
     }
-    _onClick(){
-        //window.location.href = '/about/1'
+    componentDidMount(){
         this.refs.timeDropper.setValue('2:40')
-        this.refs.timePicki.setValue('2:80')
-        console.log(this.refs.timePicki.getValue())
+        this.refs.timeDropper.init()
+    }
+    _onClick(){
+        
     }
     render(){
         return (
@@ -24,7 +24,6 @@ class Product extends Component{
                     title="Product"/>
                 <M.Column>
                     <M.TimeDropper ref="timeDropper"/>
-                    <M.TimePicki ref="timePicki"/>
                     <a onClick={this._onClick}>About 1</a>
                 </M.Column>
             </M.Grid>

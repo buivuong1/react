@@ -1,12 +1,12 @@
 import React from 'react'
-import * as M from 'modules'
+import Container from '../modules/base/container'
 
 class App extends React.Component{
     render(){
         return (
-            <M.Container>
+            <Container>
                 {this.props.children}
-            </M.Container>
+            </Container>
         )
     }
 }

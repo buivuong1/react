@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {ImageChunks} from '../chunks'
 
 class Image extends Component{
     static propTypes = {
@@ -9,10 +8,6 @@ class Image extends Component{
     }
     static defaultProps = {
         semantic: true
-    }
-    componentDidMount(){
-        var self = this
-        ImageChunks().then(images => {})
     }
     render(){
         var semantic = (this.props.semantic)?'ui ':''

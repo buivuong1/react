@@ -11,9 +11,11 @@ class TimeDropper extends Component{
             setCurrentTime: false
         }
     }
+    init(options){
+        $(this.refs.timedropper).timeDropper({...options, ...this.props.options})
+    }
     setValue(value){
         $(this.refs.timedropper).val(value)
-        $(this.refs.timedropper).timeDropper(this.props.options)
     }
     getValue(){
         return $(this.refs.timedropper).val()  

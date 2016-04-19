@@ -1,14 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import {ItemChunks} from '../chunks'
 
 class Item extends Component{
     static propTypes = {
         className: PropTypes.string,
         single: PropTypes.bool
-    }
-    componentDidMount(){
-        var self = this
-        ItemChunks().then(items => {})
     }
     render(){
         var single = (!this.props.single)?'ui ':''

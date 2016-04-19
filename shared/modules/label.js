@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {LabelChunks} from '../chunks'
 
 class Label extends Component{
     static propTypes = {
@@ -9,9 +8,11 @@ class Label extends Component{
     static defaultProps = {
         type: 'div'
     }
-    componentDidMount(){
-        var self = this
-        LabelChunks().then(buttons => {})
+    hide(){
+        $(this.refs.label).css({display: 'none'})
+    }
+    show(){
+        $(this.refs.label).css({display: 'inline-block'})  
     }
     render(){
         var className = (!this.props.className)?'ui label':'ui '+this.props.className+' label'
