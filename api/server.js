@@ -1,5 +1,6 @@
 var express = require('express');
 var http = require('http');
+var cors = require('cors');
 
 var app = express();
 
@@ -11,6 +12,8 @@ app.use(compress({
         return true;
      }
 }));
+
+app.use(cors());
 
 var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
@@ -24,11 +27,14 @@ require('./routes')(router);
 app.use('/', router);
 
 var server = http.createServer(app);
-var models = require('./models');
 
-models.sequelize.sync().then(function(){
+server.listen(4000);
+server.on('listening', function(){
+    console.log('Listening on 4000');
+});
+/*models.sequelize.sync().then(function(){
     server.listen(4000);
     server.on('listening', function(){
         console.log('Listening on 4000');
     });
-})
+})*/

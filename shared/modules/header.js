@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {HeaderChunks} from '../chunks'
 
 class Header extends Component{
     static propTypes = {
@@ -8,10 +7,6 @@ class Header extends Component{
     }
     static defaultProps = {
         type: 'div'
-    }
-    componentDidMount(){
-        var self = this
-        HeaderChunks().then(headers => {})
     }
     render(){
         var className = (!this.props.className)?'ui header':'ui '+this.props.className+' header'
