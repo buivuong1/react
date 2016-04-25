@@ -4,7 +4,8 @@ class InputText extends Component{
     static propTypes = {
         className: PropTypes.string,
         type: PropTypes.string,
-        placeholder: PropTypes.string
+        placeholder: PropTypes.string,
+        onChange: PropTypes.func
     }
     static defaultProps = {
         type: 'text'
@@ -12,9 +13,13 @@ class InputText extends Component{
     getValue(){
         return $(this.refs.input).val()
     }
+    setValue(value){
+        $(this.refs.input).val(value)
+    }
     render(){
         return (
-            <input type={this.props.type} placeholder={this.props.placeholder} ref="input"/>
+            <input type={this.props.type} placeholder={this.props.placeholder}
+                onChange={this.props.onChange} ref="input"/>
         )
     }
 }

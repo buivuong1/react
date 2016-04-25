@@ -8,13 +8,16 @@ import Field from '../../../modules/form/field'
 import InputText from '../../../modules/input/text'
 import TextArea from '../../../modules/input/textarea'
 import Button from '../../../modules/button'
+import Icon from '../../../modules/icon'
+import Divider from '../../../modules/divider'
+import Segment from '../../../modules/segment'
+import Alert from '../../../modules/alert'
 import validate from 'validate.js'
 import ServiceSize from '../../../services/size'
 
 class SizeAdd extends Component{
     constructor(props){
         super(props)
-        this._onAddSize = this._onAddSize.bind(this)
         this.formValidate = {
             name: {
                 presence: {
@@ -30,44 +33,66 @@ class SizeAdd extends Component{
                 }
             }
         }
+        this.formClicked = 0
+        this.field = 'field_'
     }
     static modules = [
         'form',
         'button',
         'sweetalert',
-        'label'
+        'label',
+        'divider',
+        'segment',
+        'icon'
     ]
+    _onChangeField(refField){
+        if(this.formClicked > 0){
+            const value = this.refs[refField].getValue()
+            const isValid = validate.single(value, this.formValidate[refField])
+            this._triggerFieldError(isValid, refField)
+        }
+    }
     _onAddSize(){
+        this.formClicked++
         const formJSON = {
             name: this.refs.name.getValue(),
             desc: this.refs.desc.getValue()
         }
         const isValid = validate(formJSON, this.formValidate)
         if(typeof isValid === 'undefined'){
+            const self = this
+            this.refs.buttonAdd.showLoader()
             ServiceSize.add(formJSON)
             .then(()=>{
-                alert('Success')
+                window.location.href = '/admin/size/list'
             })
             .catch(error=>{
-                console.log(error)
+                self.refs.buttonAdd.hideLoader()
+                Alert.error('Loi server')
             })
         }else{
-            this._triggerError(isValid)
-            swal({
-                title: 'Loi',
-                text: 'Moi ban sua cac loi mau do trong form',
-                type: 'error',
-                confirmButtonText: 'Dong'
-            })
+            this._triggerFormError(isValid)
         }
     }
-    _triggerError(validate){
+    _triggerFormError(validate){
         for(let keyError in validate){
             let keyValue = validate[keyError]
-            const keyErrorField = 'field_'+keyError
-            this.refs[keyErrorField].hasError()
+            const keyErrorField = this.field+keyError
+            this.refs[keyErrorField].addError()
             this.refs[keyErrorField].showError(keyValue[0])
         }
+    }
+    _triggerFieldError(validate, refField){
+        if(typeof validate === 'undefined'){
+            this.refs[this.field+refField].removeError()
+            this.refs[this.field+refField].hideError()
+        }else{
+            this.refs[this.field+refField].addError()
+            this.refs[this.field+refField].showError(validate[0])
+        }
+    }
+    _backToSizeList(){
+        window.location.href = '/admin/size/list'
     }
     render(){
         return (
@@ -75,17 +100,26 @@ class SizeAdd extends Component{
                 <Helmet title="Size Add"/>
                 <Row>
                     <Column>
-                        <Form type="div">
-                            <Field ref="field_name">
-                                <label>Kich thuoc</label>
-                                <InputText ref="name" placeholder="Kich thuoc"/>
-                            </Field>
-                            <Field ref="field_desc">
-                                <label>Mo ta ngan</label>
-                                <TextArea ref="desc" placeholder="Mo ta ngan"/>
-                            </Field>
-                            <Button className="fluid" onClick={this._onAddSize}>Them</Button>
-                        </Form>
+                        <Segment>
+                            <Button className="small primary" onClick={this._backToSizeList.bind(this)}>
+                                <Icon className="fast backward"/>
+                                Tro ve danh sach
+                            </Button>
+                            <Divider className="hidden"/>
+                            <Form type="div">
+                                <Field ref={this.field+'name'}>
+                                    <label>Kich thuoc</label>
+                                    <InputText ref="name" placeholder="Kich thuoc"
+                                        onChange={this._onChangeField.bind(this, 'name')}/>
+                                </Field>
+                                <Field ref={this.field+'desc'}>
+                                    <label>Mo ta ngan</label>
+                                    <TextArea ref="desc" placeholder="Mo ta ngan"
+                                        onChange={this._onChangeField.bind(this, 'desc')}/>
+                                </Field>
+                                <Button className="fluid" onClick={this._onAddSize.bind(this)} ref="buttonAdd">Them</Button>
+                            </Form>
+                        </Segment>
                     </Column>
                 </Row>
             </Grid>

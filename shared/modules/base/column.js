@@ -2,12 +2,11 @@ import React, {Component, PropTypes} from 'react'
 
 class Column extends Component{
     static propTypes = {
-        className: PropTypes.string
+        size: PropTypes.string.isRequired
     }
     render(){
-        var className = (!this.props.className)?'column':this.props.className+' column'
         return (
-            <div className={className}>
+            <div className={"pure-u-"+this.props.size}>
                 {this.props.children}
             </div>
         )

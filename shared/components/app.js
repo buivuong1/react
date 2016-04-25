@@ -1,12 +1,11 @@
 import React from 'react'
-import Container from '../modules/base/container'
 
 class App extends React.Component{
     render(){
         return (
-            <Container>
+            <div>
                 {this.props.children}
-            </Container>
+            </div>
         )
     }
 }

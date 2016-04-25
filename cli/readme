@@ -1,1 +1,0 @@
-sudo nodemon --watch /home/buivuong/Desktop/best/node_modules/.bin/babel-node --exec babel-node server-render.js

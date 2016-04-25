@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 module.exports = {
   entry: {
-    'build': path.join(process.cwd(), 'client-render.js')
+    'admin_product_add': path.join(process.cwd(), 'shared/components/admin/product/productAdd')
   },
   output: {
     path: './public/',

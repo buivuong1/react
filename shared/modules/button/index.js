@@ -9,6 +9,12 @@ class Button extends Component{
     static defaultProps = {
         type: 'button'
     }
+    showLoader(){
+        $(this.refs.button).addClass('loading')
+    }
+    hideLoader(){
+        $(this.refs.button).removeClass('loading')
+    }
     render(){
         var className = (!this.props.className)?'ui button':'ui '+this.props.className+' button'
         return (

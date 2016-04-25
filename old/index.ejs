@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- head.title %>
+    <%- head.meta %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+    <% for(var i = 0; i < modules.length; i++) { %>
+      <% if(modules[i].indexOf('.css') > -1){ %>
+        <link rel="stylesheet" type="text/css" href="<%= modules[i] %>">
+      <% }else{ %>
+        <script type="text/javascript" src="<%= modules[i] %>"></script>
+      <% } %>
+    <% } %>
+
+    <script>
+      window.__INITIAL_DATA__ = <%- JSON.stringify(initData) %>;
+    </script>
+    <link rel="stylesheet" type="text/css" href="/custom.css">
+  </head>
+  <body>
+    <div id="app"><%- componentHTML %></div>
+    <script type="text/javascript" src="/public/build.js"></script>
+  </body>
+</html>

@@ -13,12 +13,20 @@ class Field extends Component{
     componentDidMount(){
         this.refs.label.hide()
     }
-    hasError(){
+    addError(){
         $(this.refs.field).addClass('error')
+    }
+    removeError(){
+        $(this.refs.field).removeClass('error')
     }
     showError(message){
         this.message = message
         this.refs.label.show()
+        this.forceUpdate()
+    }
+    hideError(){
+        this.message = ''
+        this.refs.label.hide()
         this.forceUpdate()
     }
     render(){
