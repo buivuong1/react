@@ -19,6 +19,11 @@
     "semantic": "semantic-ui#^2.1.8"
   },
   "devDependencies": {
-    "semantic": "semantic-ui#^2.1.8"
+    "semantic": "semantic-ui#^2.1.8",
+    "moment": "^2.13.0",
+    "pure": "^0.6.0",
+    "Slidebars": "^0.10.3",
+    "smartmenus": "^1.0.0",
+    "font-awesome": "^4.6.1"
   }
 }

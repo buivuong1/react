@@ -1,9 +1,10 @@
 var SizeCRUDService = require('../services/size/crud');
+var SizeListService = require('../services/size/list');
 var moment = require('moment');
 
 module.exports = {
     postAdd: function(req, res){
-        var current_date = moment().format('YYYY-MM-DD HH:mm:ss')
+        var current_date = moment().format('YYYY-MM-DD HH:mm:ss');
         var body = {
             name: req.body.name,
             desc: req.body.desc,
@@ -14,7 +15,54 @@ module.exports = {
         }
         SizeCRUDService.add(body)
         .then(function(){
-            res.json({message: 'success'});
+            res.json('success');
+        })
+        .catch(function(error){
+            res.status(400).json(error);
+        })
+    },
+    postEdit: function(req, res){
+        var current_date = moment().format('YYYY-MM-DD HH:mm:ss');
+        var body = {
+            id: req.body.id,
+            name: req.body.name,
+            desc: req.body.desc,
+            updated_by: 1,
+            updated_at: current_date
+        }
+        SizeCRUDService.edit(body)
+        .then(function(){
+            res.json('success');
+        })
+        .catch(function(error){
+            res.status(400).json(error);
+        })
+    },
+    postDelete: function(req, res){
+        var body = {
+            id: req.body.id
+        }
+        SizeCRUDService.delete(body)
+        .then(function(){
+            res.json('success');
+        })
+        .catch(function(error){
+            res.status(400).json(error);
+        })
+    },
+    getListAll: function(req, res){
+        SizeListService.listAll()
+        .then(function(list){
+            res.json(list);
+        })
+        .catch(function(error){
+            res.status(400).json(error);
+        })
+    },
+    postDetail: function(req, res){
+        SizeListService.detail({id: req.body.id})
+        .then(function(list){
+            res.json(list);
         })
         .catch(function(error){
             res.status(400).json(error);
